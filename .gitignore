@@ -1,0 +1,4 @@
+#Ignores the dataset used for training
+
+__pycache__/
+data/
