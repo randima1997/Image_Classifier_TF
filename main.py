@@ -14,9 +14,9 @@ from keras.preprocessing.image import ImageDataGenerator
 # Model definition
 
 base_model = keras.applications.ResNet50(
-                input_shape= (224,224,3),
-                weights= "imagenet",
-                include_top= False          # Removes the final fully-connected layer
+    input_shape= (224,224,3),
+    weights= "imagenet",
+    include_top= False                      # Removes the final fully-connected layer
 )
 
 base_model.trainable = False
