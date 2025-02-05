@@ -19,11 +19,10 @@ base_model = keras.applications.ResNet50(
     include_top= False                      # Removes the final fully-connected layer
 )
 
-base_model.trainable = False
+base_model.trainable = True
 
 x = base_model.output
 x = layers.GlobalAveragePooling2D()(x)
-x = layers.Dense(1024, activation= "relu")(x)
 predictions = layers.Dense(8)(x)
 
 model = keras.Model(base_model.input, predictions)
@@ -53,7 +52,7 @@ test_datagen = ImageDataGenerator(
 train_generator = train_datagen.flow_from_directory(
     directory= train_dir,
     target_size= (224,224),
-    batch_size= 64,
+    batch_size= 32,
     subset= "training",
     shuffle= True,
     color_mode= "rgb",
@@ -63,7 +62,7 @@ train_generator = train_datagen.flow_from_directory(
 val_generator = train_datagen.flow_from_directory(
     directory= train_dir,
     target_size= (224, 224),
-    batch_size= 64,
+    batch_size= 32,
     subset= "validation",
     class_mode= "categorical"
 )
@@ -72,7 +71,7 @@ val_generator = train_datagen.flow_from_directory(
 test_generator = test_datagen.flow_from_directory(
     directory = val_dir,
     target_size= (224,224),
-    batch_size= 64,
+    batch_size= 32,
     class_mode= "categorical"
 )
 # Training
